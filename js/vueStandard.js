@@ -141,4 +141,116 @@ var objetJ = new Vue({
     }
 });
 
+//proprietes calculees exemple basique
 
+var objetK = new Vue({
+    el: '#app14',
+    data: {
+        message: 'Bonjour'
+    },
+    computed: {
+        //un accesseur (getter) calculé
+        reversedMessage: function () {
+            //'this' pointe sur l'instance vm
+            return this.message.split('').reverse().join('')
+        },
+        now: function () {
+            return Date.now()
+        }
+    }
+});
+
+//propriétés calculées vs propriétés observées
+
+//Code imperatif calculé
+var objetL = new Vue({
+    el: '#app15',
+    data: {
+        firstName: 'Foo',
+        lastName: 'Bar',
+        fullName: 'Foo Bar'
+    },
+    watch: {
+        firstName: function (val) {
+            this.fullName = val + ' ' + this.lastName
+        },
+        lastName: function (val) {
+            this.fullName = this.firstName + ' ' + val
+        }
+    }
+});
+
+//Code répétitif observé
+var objetM = new Vue({
+    el: '#app16',
+    data: {
+        firstName: 'Foo',
+        lastName: 'Bar'
+    },
+    computed: {
+        fullName: function () {
+            return this.firstName + ' ' + this.lastName
+        }
+    }
+});
+
+//Mutateur calculé
+
+var objetN = new Vue({
+   el: '#app17',
+   data: {
+       firstName: 'Jerome',
+       lastName: 'Villiseck'
+   } ,
+    computed: {
+       fullName: {
+           //accesseur Attention syntaxe spécifique pour les déclarer => nom de fonction > accolade > nom de sous fonction
+           get: function() {
+               return this.firstName + ' ' + this.lastName
+           },
+           //mutateur
+           set: function (newValue){
+               var names = newValue.split(' ');
+               this.firstName = names[0];
+               this.lastName = names[names.length - 1]
+           }
+       }
+    }
+});
+
+var watchExampleVM = new Vue({
+    el: '#watch-example',
+    data: {
+        question: '',
+        answer: 'Je ne peux pas vous donner une réponse avant que vous ne posiez une question'
+    },
+    watch: {
+        // à chaque fois que la question change, cette fonction s'exécutera
+        question: function (newQuestion, oldQuestion){
+            this.answer = "J'attends que vous arrêtiez de taper...";
+            this.debouncedGetAnswer()
+        }
+    },
+    created: function () {
+        // _.debounce est une fonction fournie par lodash pour limiter la fréquence
+        // d'exécution d'une opération particulièrement couteuse.
+        this.debouncedGetAnswer = _.debounce(this.getAnswer, 500) //ainsi on appelle getAnswer uniquement toutes les 500 milisecondes pour eviter de trop nombreux appels à l'API, un appel étant couteux
+    },
+    methods: {
+        getAnswer: function() {
+            if (this.question.indexOf('?') === -1){ //Si l'attribut question ne contient pas de point d'interrogation
+                this.answer = "Les questions contiennent généralement un point d'interrogation. ;-)";
+                return
+            }
+            this.answer = 'Je reflechis...';
+            let vm = this;
+            axios.get('https://yesno.wtf/api')
+                .then(function (response) {
+                    vm.answer = _.capitalize(response.data.answer)
+                })
+                .catch(function (error) {
+                    vm.answer = "Erreur ! Impossible d'accéder à l'API." + error
+                })
+        }
+    }
+});

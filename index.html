@@ -93,15 +93,61 @@
 <h3>Directives argumentées</h3>
 <div id="app13">
     <p><a v-bind:href="url"> Lien changeant grace à l'attribut url de l'objet G en vuejs </a></p>
-    <p><a v-on:click="doSomething"> Un evenement fonction de la valeur de l'attribut doSomething </a></p>
+    <!--<p><a v-on:click="doSomething"> Un evenement fonction de la valeur de l'attribut doSomething </a></p>-->
 </div>
 
+<h2>Propriétés calculées et observateurs</h2>
+
+<h3>Propriétés calculées</h3>
+
+<div id="app14">
+    <p>Message original : "{{ message }}"</p>
+    <p>Message inversé calculé : "{{ reversedMessage }}"</p>
+    <p>Message avec la date : {{ now }}</p>
+</div>
+
+<h3>Propriétés calculées vs propriétés observées</h3>
+
+<h4>Calculé, impératif</h4>
+<div id="app15">{{ fullName }}<br>
+    {{ firstName }}<br>
+    {{ lastName }}
+</div>
+
+<h4>Observé, déclaratif</h4>
+<div id="app16">{{ fullName }}
+</div>
+
+<h3>Mutateur calculé</h3>
+
+<div id="app17">
+    <p>{{ fullName }}</p>
+    <p>{{ lastName }}</p>
+</div>
+
+<!--Observateurs-->
+<div id="watch-example">
+    <p>
+        Posez votre question (réponse par Oui ou Non) :
+        <input v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+</div>
 
 
 
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!--Attention à l'ordre des scripts dans le fichier pour faire fonctionner les instances, le fichier contenant les
+instances toujours à la fin-->
+
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
 <script src="js/vueStandard.js"></script>
+
+
 
 </html>
