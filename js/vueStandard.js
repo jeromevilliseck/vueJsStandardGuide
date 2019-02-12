@@ -23,9 +23,9 @@ var app4 = new Vue({
     el: '#app-4',
     data: {
         todos: [
-            { text: 'Apprendre JavaScript' },
-            { text: 'Apprendre Vue' },
-            { text: 'Créer quelque chose de génial' }
+            {text: 'Apprendre JavaScript'},
+            {text: 'Apprendre Vue'},
+            {text: 'Créer quelque chose de génial'}
         ]
     }
 });
@@ -61,9 +61,84 @@ var app7 = new Vue({
     el: '#app-7',
     data: {
         groceryList: [
-            { id: 0, text: 'Légumes' },
-            { id: 1, text: 'Fromage' },
-            { id: 2, text: 'Tout ce que les humains sont supposés manger' }
+            {id: 0, text: 'Légumes'},
+            {id: 1, text: 'Fromage'},
+            {id: 2, text: 'Tout ce que les humains sont supposés manger'}
         ]
     }
 });
+
+//Partie 2 les instances
+
+var obj = {
+    foo: 'bar'
+};
+
+Object.freeze(obj); //Permet de geler ou non les instances
+
+new Vue({
+    el: '#app8',
+    data: obj
+});
+
+
+//Propriétés proxifiées
+// var prop = { a: 1 };
+// var vm = new Vue({
+//     el: '#example',
+//     data: prop
+// });
+//
+// vm.$data === prop; // => true
+// vm.$el === document.getElementById('example') // => true
+//
+// // $watch est une méthode de l'instance
+// vm.$watch('a', function (newVal, oldVal) {
+//     // cette fonction de rappel sera appelée quand `vm.a` changera
+// });
+
+
+//Interpolations
+var localVar = {a: 'salut'};
+
+var objetG = new Vue({ // Attention on manipule l'objet dans la console vie le nom de l'instance objetI pas via le nom de l'el
+    el: '#app10',
+    //data: localVar, //On passe l'objet directement dans l'objet data, on ne manipule pas data de l'exterieur, mais les proprietes de localVar
+    data: {
+        message: 'coucou'
+    }
+});
+
+//Interprétation du HTML
+
+var objetH = new Vue({
+    el: '#app11',
+    data: {
+        rawHtml: 'Ceci devrait être rouge',
+        dynamicId: 'two', //Changer la valeur par one ou two pour modifier la valeur de l'id en html
+        isButtonDisabled: undefined //true desactive le button
+    }
+});
+
+//Utilisation des expressions javascript
+
+var objetI = new Vue({
+    el: '#app12',
+    data: {
+        number: 5,
+        ok: '', //si vide retourne oui, sinon retourne non
+        message: 'abracadabra magic',
+        id: 2
+    }
+});
+
+//Utilisation des directives argumentées
+
+var objetJ = new Vue({
+    el: '#app13',
+    data: {
+        url: 'https://www.google.fr'
+    }
+});
+
+

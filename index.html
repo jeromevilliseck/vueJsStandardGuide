@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title of the document</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -54,6 +55,49 @@
         ></todo-item>
     </ol>
 </div>
+
+<h2>Partie instance</h2>
+
+<div id="app8">
+    <p>{{ foo }}</p>
+    <!-- cela ne va plus mettre à jour `foo` ! -->
+    <button v-on:click="foo = 'baz'">Change le</button>
+</div>
+
+<h2>Partie interpolations</h2>
+
+<div id="app10">
+    <span v-once>Ceci ne changera jamais : {{ message }}</span>
+</div>
+
+<h3>Interpretation html</h3>
+<div id="app11">
+    <p>Using mustaches:{{ rawHtml }}</p>
+    <p>Using v-html directive: <span v-html="rawHtml" style="color:red"></span></p>
+
+    <div v-bind:id="dynamicId">texte dans une div dynamique</div>
+
+    <button v-bind:disabled="isButtonDisabled">Button</button>
+</div>
+
+<h3>Utilisation des expressions javascript</h3>
+<div id="app12">
+    <p>{{ number + 1 }}</p>
+    <p>{{ ok ? 'OUI' : 'NON' }}</p>
+    <!--<p>{{ if (ok) { return 'OUI' } }}</p> identique a la ligne n-1 mais ne peut pas fonctionner : ternaires uniquement-->
+    <!--<p>{{ var a = 1 }}</p> idem déclarations interdites-->
+    <p>{{ message.split('').reverse().join('') }}</p>
+    <div v-bind:id="'list-' + id">liste</div>
+</div>
+
+<h3>Directives argumentées</h3>
+<div id="app13">
+    <p><a v-bind:href="url"> Lien changeant grace à l'attribut url de l'objet G en vuejs </a></p>
+    <p><a v-on:click="doSomething"> Un evenement fonction de la valeur de l'attribut doSomething </a></p>
+</div>
+
+
+
 
 </body>
 
