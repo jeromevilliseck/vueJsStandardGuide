@@ -134,6 +134,55 @@
     <p>{{ answer }}</p>
 </div>
 
+<!--Liaison de classes HTML-->
+<div id="app18">
+<div v-bind:class="{ active: isActive }">div ayant une propriete class active si isActive est TRUE en vue js</div>
+<div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">idem ayant une propriété active et text-danger selon le rendu des booléans</div>
+</div>
+
+
+<!--Déclarer la classe seulement sans les objets liés dans l'attribut, rend le meme resultat que app18 avec une syntaxe plus claire-->
+
+<div id="app19">
+<div v-bind:class="classObject">mettre l'objet complet en class html</div>
+</div>
+
+<!--Lier une propriété calculée retournant un objet-->
+<div id="app20">
+<div v-bind:class="classObject">passer l'objetQ.error à autre chose que null dans la console pour comprendre</div>
+</div>
+
+<!--Syntaxe Tableau-->
+<div id="app21">
+    <div v-bind:class="[isActive ? activeClass : '', errorClass]">condtionnelle avec passage tableau</div>
+    <div v-bind:class="[{ active: isActive }, errorClass]">passage d'un tableau pour application liste de classes
+        avec conditionnelle, penser a actualiser le cache</div>
+</div>
+
+<!--TODO partie avec des composants à effectuer une fois les composants assimilés-->
+
+<h2>Liaison de styles HTML</h2>
+
+<h3>Syntaxe objet</h3>
+
+<div id="app22">
+<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">du css en javascript dans la balise</div>
+</div>
+
+<div id="app23">
+    <div v-bind:style="styleObject">du css via un objet de style javascript</div>
+</div>
+
+<h3>Syntaxe tableau</h3>
+
+<div id="app24">
+    <div v-bind:style="[baseStyles, overridingStyles]">plusieurs membres data d'une instance composent un seul style</div>
+</div>
+
+<h3>Valeurs multiples sur des préfixes</h3>
+
+<div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">rendra la derniere valeur dans le tableau supporté
+par le navigateur</div>
 
 
 </body>
@@ -147,7 +196,6 @@ instances toujours à la fin-->
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 
 <script src="js/vueStandard.js"></script>
-
 
 
 </html>

@@ -254,3 +254,81 @@ var watchExampleVM = new Vue({
         }
     }
 });
+
+//Liaison de classes HTML et permuttation de classes
+
+var objetO = new Vue({
+    el: '#app18',
+    data: {
+        isActive: true,
+        hasError: false
+    }
+});
+
+//Liaison de classe avec variation des classes selon les booléans des variables
+
+var objetP = new Vue({
+    el: '#app19',
+    data: {
+        classObject: {
+            active: true,
+            'text-danger': false
+        }
+    }
+});
+
+var objetQ = new Vue({
+    el: '#app20',
+    data: {
+        isActive: true,
+        error: null
+    },
+    computed: {
+        classObject: function () {
+            return {
+                active: this.isActive && !this.error,
+                'text-danger': this.error && this.error.type === 'fatal'
+            }
+        }
+    }
+});
+
+var objetR = new Vue({
+    el: '#app21',
+    data: {
+        isActive: true,
+        activeClass: 'elem1tableau',
+        errorClass: 'elem3tableau'
+    }
+});
+
+var objetS = new Vue({
+    el: '#app22',
+    data: {
+        activeColor: 'red',
+        fontSize: 30
+    }
+});
+
+var objetT = new Vue({
+    el: '#app23',
+    data: {
+        styleObject: {
+            color: 'blue',
+            fontSize: '13px'
+        }
+    }
+});
+
+var objetU = new Vue({
+    el: '#app24',
+    data: {
+        baseStyles: {
+            color: 'blue',
+            fontSize: '13px'
+        },
+        overridingStyles: {
+            textAlign: 'right'
+        }
+    }
+});
